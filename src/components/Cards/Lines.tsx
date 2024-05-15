@@ -1,8 +1,6 @@
 'use client';
 
-// install (please try to align the version of installed @nivo packages)
-// yarn add @nivo/line
-import { ResponsiveLine } from '@nivo/line';
+import { ResponsiveLine, Serie } from '@nivo/line';
 import {
   Card,
   CardContent,
@@ -11,15 +9,23 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const MyResponsiveLine = ({ data }: { data: Array<object> }) => {
+// Define the type for the data
+interface DataPoint {
+  x: string;
+  y: number;
+}
+
+interface Series {
+  id: string;
+  color: string;
+  data: DataPoint[];
+}
+
+// Component for the responsive line chart
+const MyResponsiveLine = ({ data }: { data: Series[] }) => {
   return (
     <ResponsiveLine
-      data={data}
+      data={data as Serie[]}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: 'point' }}
       yScale={{
@@ -64,7 +70,7 @@ const MyResponsiveLine = ({ data }: { data: Array<object> }) => {
 };
 
 export default function Lines() {
-  const data = [
+  const data: Series[] = [
     {
       id: 'japan',
       color: 'hsl(158, 70%, 50%)',
@@ -162,9 +168,8 @@ export default function Lines() {
       <CardHeader>
         <CardTitle>Lines</CardTitle>
         <CardDescription>
-          {' '}
           This chart displays the counts of various modes of transportation in
-          different countries.{' '}
+          different countries.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4 h-[400px]">

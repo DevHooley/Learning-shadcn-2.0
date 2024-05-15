@@ -6,7 +6,17 @@ import { useState } from 'react';
 import { Command, CommandInput } from '@/components/ui/command';
 import { Badge } from '@/components/ui/badge';
 
-const UserItem = dynamic(() => import('useritem'), { ssr: false });
+interface UserItemProps {
+  color: string;
+  title: string;
+  description: string;
+  shadow: boolean;
+  border: boolean;
+}
+
+const UserItem = dynamic<UserItemProps>(() => import('useritem'), {
+  ssr: false,
+});
 
 type Member = {
   email: string;

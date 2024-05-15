@@ -1,7 +1,5 @@
 'use client';
-
 import { ResponsiveBump } from '@nivo/bump';
-
 import {
   Card,
   CardContent,
@@ -10,10 +8,30 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-const MyResponsiveBump = (props: any) => {
+interface BumpDataPoint {
+  x: number | string;
+  y: number;
+}
+
+interface BumpSeries {
+  id: string;
+  data: BumpDataPoint[];
+}
+
+interface MyResponsiveBumpProps {
+  data: BumpSeries[];
+}
+
+const theme = {
+  fontSize: 12,
+  fontFamily: 'Arial, sans-serif',
+  textColor: '#333',
+};
+
+const MyResponsiveBump = ({ data }: MyResponsiveBumpProps) => {
   return (
     <ResponsiveBump
-      data={props.data}
+      data={data}
       colors={{ scheme: 'spectral' }}
       lineWidth={3}
       activeLineWidth={6}
@@ -26,14 +44,7 @@ const MyResponsiveBump = (props: any) => {
       pointBorderWidth={3}
       activePointBorderWidth={3}
       pointBorderColor={{ from: 'serie.color' }}
-      axisTop={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: '',
-        legendPosition: 'middle',
-        legendOffset: -36,
-      }}
+      axisTop={null}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
@@ -52,11 +63,20 @@ const MyResponsiveBump = (props: any) => {
       }}
       margin={{ top: 20, right: 50, bottom: 20, left: 30 }}
       axisRight={null}
-      // Adding the required properties
       useMesh={true}
-      interpolation="smooth" // Example value
-      xPadding={0.5} // Example value
-      xOuterPadding={0.2} // Example value
+      interpolation="smooth"
+      xPadding={0.5}
+      xOuterPadding={0.2}
+      yOuterPadding={0.2}
+      theme={theme}
+      opacity={1}
+      activeOpacity={1}
+      startLabel={(d) => `${d.id} start`}
+      endLabel={(d) => `${d.id} end`}
+      startLabelPadding={10}
+      endLabelPadding={10}
+      startLabelTextColor={{ from: 'color', modifiers: [['darker', 1.5]] }}
+      endLabelTextColor={{ from: 'color', modifiers: [['darker', 1.5]] }}
     />
   );
 };
@@ -186,7 +206,7 @@ export default function General() {
   ];
 
   return (
-    <Card className="w-full ">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>This week</CardTitle>
         <CardDescription>These are the results of this week.</CardDescription>
