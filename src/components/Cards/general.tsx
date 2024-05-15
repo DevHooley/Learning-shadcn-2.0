@@ -50,7 +50,7 @@ const MyResponsiveBump = (props: any) => {
         legendPosition: 'middle',
         legendOffset: -40,
       }}
-      margin={{ top: 40, right: 100, bottom: 40, left: 60 }}
+      margin={{ top: 20, right: 50, bottom: 20, left: 30 }}
       axisRight={null}
       // Adding the required properties
       useMesh={true}

@@ -7,8 +7,9 @@ import { Bell } from 'lucide-react';
 import { Settings } from 'lucide-react';
 import { Cookie } from 'lucide-react';
 import { MessageSquare } from 'lucide-react';
+import Link from 'next/link';
 
-import UserItem from '@/components/UserItem';
+import UserItem from 'useritem';
 import {
   Command,
   CommandGroup,
@@ -67,9 +68,19 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="fixed flex flex-col gap-4 w-[300px] min-w-[300px] border-r min-h-screen p-4">
+      <div className="fixed flex flex-col gap-4 w-[300px] min-w-[300px] p-4  min-h-screen">
         <div className="">
-          <UserItem />
+          <UserItem
+            title="Liv Thevenard"
+            description="LivThevenard@icloud"
+            avatarUrl="https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/339128999_1432632874234220_4482217028050998622_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ctF-VIcnsFgQ7kNvgGDW5G3&_nc_oc=AdhvdUiXJ5nB-MVSWBFJjlTe-6lrh4m9HoEqk5u3D9sEkvM_00qh6opixZR9dJdUh38&_nc_ht=scontent-ord5-2.xx&oh=00_AYD2Km16Ocb33NXOBPhlPoiIrAbonfYInKYUc6aO1Witmw&oe=664ABC10"
+            online={true}
+            status={true}
+            shadow={true}
+            style={{
+              border: '2px solid #f1f1f1',
+            }}
+          />
         </div>
         <div className="grow">
           <Command style={{ overflow: 'visible' }}>
@@ -90,7 +101,12 @@ export default function Sidebar() {
             </CommandList>
           </Command>
         </div>
-        <div className="">Settings / Notifications</div>
+        <div className="">
+          <Link href="/team" className=" flex items-center gap-2">
+            <Settings />
+            <span className="">Team Settings</span>
+          </Link>
+        </div>
       </div>
     </>
   );
